@@ -1,10 +1,10 @@
 from django.db import models
 
 
-class Quiz(models.Model):
+class Question(models.Model):
     title = models.CharField(max_length=50)
-    correct_answer = models.ManyToManyField("Question", related_name='quiz_correct_answer')
-    variant = models.ForeignKey("Question", on_delete=models.CASCADE, related_name='quiz_variant')
+    variant = models.ManyToManyField("Answer", related_name='quiz_correct_answer')
+    correct = models.ForeignKey("Answer", on_delete=models.CASCADE, related_name='quiz_variants')
 
     def __str__(self):
         return self.title
@@ -14,12 +14,12 @@ class Quiz(models.Model):
         verbose_name_plural='Quizes'
 
 
-class Question(models.Model):
+class Answer(models.Model):
     question = models.CharField(max_length=50)
 
     def __str__(self):
         return self.question
     
     class Meta:
-        verbose_name='question'
-        verbose_name_plural='questions'
+        verbose_name='Answer'
+        verbose_name_plural='Answers'
