@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+
+  backend:
+    container_name: server
+    build: ./server
+    ports:
+      - "8000:8000"
+    restart: always
+    command: "python3 manage.py runserver 0.0.0.0:8000"
+    volumes: 
+      - ./server:/backend
+
+    
+  react-ui:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes: 
+      - ./web:/web
+
+
