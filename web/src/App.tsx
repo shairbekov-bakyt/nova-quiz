@@ -55,7 +55,7 @@ function App() {
   const [step, setStep] = React.useState(0);
 
   useEffect(() => {
-    axios.get("http://0.0.0.0:8000/api/v1/quiz/")
+    axios.get("http://0.0.0.0/api/v1/quiz/")
     .then(response => {
         setQuestion(response.data)
       })

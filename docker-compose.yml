@@ -3,7 +3,6 @@ version: "3.9"
 services:
 
   backend:
-    container_name: server
     build: ./server
     ports:
       - "8000:8000"
@@ -11,15 +10,22 @@ services:
     command: "python3 manage.py runserver 0.0.0.0:8000"
     volumes: 
       - ./server:/backend
+      - static_volume:/backend/staticfiles
 
     
-  react-ui:
-    build:
-      context: ./web
-      dockerfile: Dockerfile
+  nginx:
+    build: ./web
+    container_name: dev_web
+    restart: on-failure
+    image: nginx:1.19.8
+    volumes:
+      - ./web/nginx.conf:/etc/nginx/conf.d/default.conf
+      - static_volume:/backend/staticfiles
     ports:
-      - 3000:3000
-    volumes: 
-      - ./web:/web
+      - 80:80
+    depends_on:
+      - backend
 
 
+volumes:
+  static_volume:
