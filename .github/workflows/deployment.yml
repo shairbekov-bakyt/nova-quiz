@@ -1,0 +1,13 @@
+name: CI-CD
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: action/checkout@v3
+      - uses: docker/build-push-action@v3
+      - run: docker-compose build --no-cache
+      - run: docker-compose up -d
