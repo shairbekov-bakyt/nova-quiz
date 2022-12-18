@@ -1,5 +1,5 @@
 # docker build
-docker-compose build --no-cache
+docker-compose build
 
 # docker up
 docker-compose up -d
