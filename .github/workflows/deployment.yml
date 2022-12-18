@@ -8,6 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: docker/build-push-action@v3
       - run: docker-compose build --no-cache
       - run: docker-compose up -d
+      - run: docker-compose stop
