@@ -24,6 +24,5 @@ jobs:
 
           script: |
             cd ${{ secrets.TARGET_DIR }}
+            sudo docker-compose build
             sudo docker-compose up
-#            chmod 700 buildscript.sh
-#            sudo bash buildscript.sh
